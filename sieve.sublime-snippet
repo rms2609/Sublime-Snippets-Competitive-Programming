@@ -1,0 +1,30 @@
+<snippet>
+	<content><![CDATA[
+
+#define MX 100055
+bool prime[MX]={1,1};
+vector<int>pr;
+void sieve()
+{
+
+    for(int i=2;i*i<MX;i++)
+     if(!prime[i])
+      for(int j=i*i;j<MX;j+=i)
+       prime[j]=1;                // prime[i]=1 represents i is non-prime.
+
+    pr.push_back(2);   // pr vector contains primes from 2,3,5,7... 100049
+    for(int i=3;i<MX;i+=2)
+     if(!prime[i])
+       pr.push_back(i);
+                         // for(int i=0;i<=10;i++)
+                         // cout<<pr[i]<<" ";cout<<endl;
+}
+
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>sieve</tabTrigger> 
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.cpp,source.c++,source.c</scope>
+	<description>sieve of prime numbers in O(n) time</description>
+</snippet>
