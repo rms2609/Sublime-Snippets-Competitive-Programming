@@ -1,0 +1,62 @@
+<snippet>
+	<content><![CDATA[
+
+// Credits: http://qr.ae/TU8JOu
+
+#define pii pair<int,int>
+#define F first
+#define S second
+#define mp make_pair
+#define pb push_back
+#define SIZE 100005
+
+vector<bool>vis;
+vector<int>dis;
+vector<vector<pii>>a;
+//priority_queue<pii, vector<pii>, prioritize> pq;
+
+class prioritize {
+    public: bool operator ()(pii &p1 ,pii &p2) {
+        return p1.S>p2.S;
+    }
+};
+
+int Dijkstra(int s, int n) {
+    for (int i = 0;i <= n; i++) {
+        vis[i] = false;
+        dis[i] = INT_MAX;
+    }
+    priority_queue<pii, vector<pii>, prioritize> pq;
+    pq.push(mp(s, dis[s]=0));
+    while(!pq.empty()) {
+        pii cur = pq.top(); pq.pop();
+        int cv = cur.F, cw = cur.S;
+            if(vis[cv]) continue;
+        vis[cv] = true;
+        for(pii x : a[cv]) {
+            if(!vis[x.F] && (cw + x.S) < dis[x.F]) {
+                pq.push(mp(x.F,dis[x.F]=cw+x.S));
+            }
+        }
+    }
+}
+void init_graph()
+{
+    
+    vis.clear();vis.resize(SIZE);
+    dis.clear();dis.resize(SIZE);
+     a.resize(SIZE);
+    for(int i=0;i<SIZE;i++)
+    {
+        a[i].clear();
+    }
+    // input your graph here
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>dijkshtra</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c,source.cpp,source.c++</scope>
+	<decription>dijkshtra using priority q in O(ElogV)</decription>
+</snippet>
