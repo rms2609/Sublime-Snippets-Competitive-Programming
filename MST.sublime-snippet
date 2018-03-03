@@ -1,0 +1,77 @@
+
+
+struct edge
+{
+   int a,b,cost;
+};
+
+bool cmp(const edge &e1,const edge &e2)
+{
+      return e1.cost<e2.cost;
+}
+
+vector<edge>graph;
+vector<int>link;
+vector<int>size;
+int nodes,edges;
+
+
+// Use of disjoin union structure comes here 
+// O(log n) complexity per operation
+
+int find(int x)
+{
+   while(x!=link[x])x=link[x];
+   return x;
+}
+int same(int a,int b)
+{
+  return find(a)==find(b);
+}
+void unite(int a,int b)
+{
+  a=find(a);
+  b=find(b);
+  if(size[b]>size[a])swap(a,b);
+  size[a]+=size[b];
+  link[b]=a;
+}
+void init()
+{
+  cin>>nodes>>edges;
+
+  graph.clear();link.clear();size.clear();
+  graph.resize(edges);link.resize(nodes+1);size.resize(nodes+1);
+
+  for(int i=0;i<edges;i++)cin>>graph[i].a>>graph[i].b>>graph[i].cost;
+  
+  for(int i=1;i<=nodes;i++)
+  {
+    link[i]=i;
+    size[i]=1;
+  }
+
+}
+/*
+int main()
+{
+  init();
+  sort(graph.begin(), graph.end(),cmp);
+  int sum=0;
+  for(auto e : graph)
+  {
+    int a=e.a;
+    int b=e.b;
+    
+    if(!same(a,b))
+      {
+        sum+=e.cost;
+        unite(a,b);
+        cout<<e.a<<" "<<e.b<<endl;  //outputs the edes in MST
+      }
+  }
+  cout<<sum<<endl; // total sum of MST
+  return 0;
+}
+*/
+
