@@ -4,4 +4,5 @@ bool comp(const vector<int>&a, const vector<int>&b){
 }
 
 // use the comp in sort function
+vector<vector<int>>vec;
 sort(vec.begin(), vec.end(), comp);
